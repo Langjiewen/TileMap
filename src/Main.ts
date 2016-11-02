@@ -27,135 +27,6 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-
-class Player extends egret.DisplayObjectContainer {
-    _main: Main;
-    _label: egret.TextField;
-    _stateMachine: StateMachine;
-    _body: egret.Bitmap;
-    _ifidle: boolean;
-    _ifwalk: boolean;
-    _i:number=0;
-
-    constructor() {
-        super();
-        this._body = new egret.Bitmap;
-        this._body.texture = RES.getRes("stand1_png");
-        this.addChild(this._body);
-        this._body.width=100;
-        this._body.height=100;
-        this._body.anchorOffsetX= this._body.width/2;
-        this._body.anchorOffsetY= this._body.height/2;
-        this._stateMachine=new StateMachine();
-        this._body.x = 32;
-        this._body.y = 32;
-        this._ifidle = true;
-        this._ifwalk = false;
-
-    }
-
-    public move(targetX: number, targetY: number) {
-        
-        if (targetX > this._body.x) {
-            this._body.skewY = 180;
-        }
-        else { this._body.skewY = 0; }
-        this._stateMachine.setState(new PlayerMoveState(this));
-    }
-
-
-    public idle() {
-
-        this._stateMachine.setState(new PlayerIdleState(this));
-      
-    }
-
-
-    public startWalk() {
-        var list = ["walk1_png", "walk2_png", "walk3_png", "walk4_png", "walk5_png", "walk6_png", "walk7_png", "walk8_png", "walk9_png", "walk10_png", "walk11_png", "walk12_png","walk13_png","walk14_png","walk15_png","walk16_png"];
-        var count = -1;
-        egret.Ticker.getInstance().register(() => {
-            count = count + 0.2;
-            if (count >= list.length) {
-                count = 0;
-            }
-            this._body.texture = RES.getRes(list[Math.floor(count)]);
-        }, this);
-        
-    }
-
-    public startidle() {
-
-        var list = ["stand1_png", "stand2_png", "stand3_png"];
-        var count = -1;
-        egret.Ticker.getInstance().register(() => {
-            count = count + 0.2;
-            if (count >= list.length) {
-                count = 0;
-            }
-
-            this._body.texture = RES.getRes(list[Math.floor(count)]);
-
-        }, this);
-    }
-}
-
-class PlayerState implements State {
-
-    _player: Player;
-
-    constructor(player: Player) {
-        this._player = player;
-
-    }
-    onEnter() { }
-    onExit() { }
-}
-
-interface State {
-    onEnter();
-    onExit();
-}
-
-class PlayerMoveState extends PlayerState {
-
-    onEnter() {
-        this._player._ifwalk = true;
-  
-        this._player.startWalk();
-    }
-
-    onExit() {
-        this._player._ifwalk = false;
-    }
-}
-
-class PlayerIdleState extends PlayerState {
-
-    onEnter() {
-         this._player._ifidle = true;
-         this._player.startidle();
-    }
-
-    onExit() {
-        this._player._ifidle = false;
-    }
-}
-
-class StateMachine {
-    CurrentState: State;
-
-    setState(e: State) {
-
-        if (this.CurrentState != null) {
-            this.CurrentState.onExit();
-        }
-        this.CurrentState = e;
-        e.onEnter();
-    }
-
-}
-
 class Main extends egret.DisplayObjectContainer {
 
     /**
@@ -163,12 +34,10 @@ class Main extends egret.DisplayObjectContainer {
      * Process interface loading
      */
     private loadingView:LoadingUI;
-    private _txInfo: egret.TextField;
 
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-        this.once(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
 
     private onAddToStage(event:egret.Event) {
@@ -248,23 +117,11 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene():void {
-
-        var topMask = new egret.Shape();
-        topMask.graphics.beginFill(0xFFFFFF, 1);
-        topMask.graphics.drawRect(0, 0, 600, 1200);
-        topMask.graphics.endFill();
-        topMask.y = 33;
-        this.addChild(topMask);
-        
-        var player: Player = new Player();
-        var map:TileMap = new TileMap(player);
-        this.addChild(map);
-        this.addChild(player);
-        player.idle();
-
+       
 
         //根据name关键字，异步获取一个json配置文件，name属性请参考resources/resource.json配置文件的内容。
         // Get asynchronously a json configuration file according to name keyword. As for the property of name please refer to the configuration file of resources/resource.json.
+        RES.getResAsync("description_json", this.startAnimation, this)
     }
 
     /**
@@ -318,30 +175,6 @@ class Main extends egret.DisplayObjectContainer {
      */
     private changeDescription(textfield:egret.TextField, textFlow:Array<egret.ITextElement>):void {
         textfield.textFlow = textFlow;
-    }
-
-    protected load(callback: Function): void {
-        var count: number = 0;
-        var self = this;
-
-        var check = function () {
-            count++;
-            if (count == 2) {
-                callback.call(self);
-            }
-        }
-
-        var loader = new egret.URLLoader();
-        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
-            var loader = e.currentTarget;
-
-            this._mcData = JSON.parse(loader.data);
-
-            check();
-        }, this);
-        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
-        var request = new egret.URLRequest("resource/assets/mc/animation.json");
-        loader.load(request);
     }
 }
 

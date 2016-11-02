@@ -26,126 +26,11 @@
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //////////////////////////////////////////////////////////////////////////////////////
-var Player = (function (_super) {
-    __extends(Player, _super);
-    function Player() {
-        _super.call(this);
-        this._i = 0;
-        this._body = new egret.Bitmap;
-        this._body.texture = RES.getRes("stand1_png");
-        this.addChild(this._body);
-        this._body.width = 100;
-        this._body.height = 100;
-        this._body.anchorOffsetX = this._body.width / 2;
-        this._body.anchorOffsetY = this._body.height / 2;
-        this._stateMachine = new StateMachine();
-        this._body.x = 32;
-        this._body.y = 32;
-        this._ifidle = true;
-        this._ifwalk = false;
-    }
-    var d = __define,c=Player,p=c.prototype;
-    p.move = function (targetX, targetY) {
-        if (targetX > this._body.x) {
-            this._body.skewY = 180;
-        }
-        else {
-            this._body.skewY = 0;
-        }
-        this._stateMachine.setState(new PlayerMoveState(this));
-    };
-    p.idle = function () {
-        this._stateMachine.setState(new PlayerIdleState(this));
-    };
-    p.startWalk = function () {
-        var _this = this;
-        var list = ["walk1_png", "walk2_png", "walk3_png", "walk4_png", "walk5_png", "walk6_png", "walk7_png", "walk8_png", "walk9_png", "walk10_png", "walk11_png", "walk12_png", "walk13_png", "walk14_png", "walk15_png", "walk16_png"];
-        var count = -1;
-        egret.Ticker.getInstance().register(function () {
-            count = count + 0.2;
-            if (count >= list.length) {
-                count = 0;
-            }
-            _this._body.texture = RES.getRes(list[Math.floor(count)]);
-        }, this);
-    };
-    p.startidle = function () {
-        var _this = this;
-        var list = ["stand1_png", "stand2_png", "stand3_png"];
-        var count = -1;
-        egret.Ticker.getInstance().register(function () {
-            count = count + 0.2;
-            if (count >= list.length) {
-                count = 0;
-            }
-            _this._body.texture = RES.getRes(list[Math.floor(count)]);
-        }, this);
-    };
-    return Player;
-}(egret.DisplayObjectContainer));
-egret.registerClass(Player,'Player');
-var PlayerState = (function () {
-    function PlayerState(player) {
-        this._player = player;
-    }
-    var d = __define,c=PlayerState,p=c.prototype;
-    p.onEnter = function () { };
-    p.onExit = function () { };
-    return PlayerState;
-}());
-egret.registerClass(PlayerState,'PlayerState',["State"]);
-var PlayerMoveState = (function (_super) {
-    __extends(PlayerMoveState, _super);
-    function PlayerMoveState() {
-        _super.apply(this, arguments);
-    }
-    var d = __define,c=PlayerMoveState,p=c.prototype;
-    p.onEnter = function () {
-        this._player._ifwalk = true;
-        this._player.startWalk();
-    };
-    p.onExit = function () {
-        this._player._ifwalk = false;
-    };
-    return PlayerMoveState;
-}(PlayerState));
-egret.registerClass(PlayerMoveState,'PlayerMoveState');
-var PlayerIdleState = (function (_super) {
-    __extends(PlayerIdleState, _super);
-    function PlayerIdleState() {
-        _super.apply(this, arguments);
-    }
-    var d = __define,c=PlayerIdleState,p=c.prototype;
-    p.onEnter = function () {
-        this._player._ifidle = true;
-        this._player.startidle();
-    };
-    p.onExit = function () {
-        this._player._ifidle = false;
-    };
-    return PlayerIdleState;
-}(PlayerState));
-egret.registerClass(PlayerIdleState,'PlayerIdleState');
-var StateMachine = (function () {
-    function StateMachine() {
-    }
-    var d = __define,c=StateMachine,p=c.prototype;
-    p.setState = function (e) {
-        if (this.CurrentState != null) {
-            this.CurrentState.onExit();
-        }
-        this.CurrentState = e;
-        e.onEnter();
-    };
-    return StateMachine;
-}());
-egret.registerClass(StateMachine,'StateMachine');
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         _super.call(this);
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-        this.once(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
     var d = __define,c=Main,p=c.prototype;
     p.onAddToStage = function (event) {
@@ -216,19 +101,52 @@ var Main = (function (_super) {
      * Create a game scene
      */
     p.createGameScene = function () {
+        var sky = this.createBitmapByName("bg_jpg");
+        this.addChild(sky);
+        var stageW = this.stage.stageWidth;
+        var stageH = this.stage.stageHeight;
+        sky.width = stageW;
+        sky.height = stageH;
         var topMask = new egret.Shape();
-        topMask.graphics.beginFill(0xFFFFFF, 1);
-        topMask.graphics.drawRect(0, 0, 600, 1200);
+        topMask.graphics.beginFill(0x000000, 0.5);
+        topMask.graphics.drawRect(0, 0, stageW, 172);
         topMask.graphics.endFill();
         topMask.y = 33;
         this.addChild(topMask);
-        var player = new Player();
-        var map = new TileMap(player);
-        this.addChild(map);
-        this.addChild(player);
-        player.idle();
+        var icon = this.createBitmapByName("egret_icon_png");
+        this.addChild(icon);
+        icon.x = 26;
+        icon.y = 33;
+        var line = new egret.Shape();
+        line.graphics.lineStyle(2, 0xffffff);
+        line.graphics.moveTo(0, 0);
+        line.graphics.lineTo(0, 117);
+        line.graphics.endFill();
+        line.x = 172;
+        line.y = 61;
+        this.addChild(line);
+        var colorLabel = new egret.TextField();
+        colorLabel.textColor = 0xffffff;
+        colorLabel.width = stageW - 172;
+        colorLabel.textAlign = "center";
+        colorLabel.text = "Hello Egret";
+        colorLabel.size = 24;
+        colorLabel.x = 172;
+        colorLabel.y = 80;
+        this.addChild(colorLabel);
+        var textfield = new egret.TextField();
+        this.addChild(textfield);
+        textfield.alpha = 0;
+        textfield.width = stageW - 172;
+        textfield.textAlign = egret.HorizontalAlign.CENTER;
+        textfield.size = 24;
+        textfield.textColor = 0xffffff;
+        textfield.x = 172;
+        textfield.y = 135;
+        this.textfield = textfield;
         //根据name关键字，异步获取一个json配置文件，name属性请参考resources/resource.json配置文件的内容。
         // Get asynchronously a json configuration file according to name keyword. As for the property of name please refer to the configuration file of resources/resource.json.
+        RES.getResAsync("description_json", this.startAnimation, this);
     };
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
@@ -274,25 +192,6 @@ var Main = (function (_super) {
      */
     p.changeDescription = function (textfield, textFlow) {
         textfield.textFlow = textFlow;
-    };
-    p.load = function (callback) {
-        var count = 0;
-        var self = this;
-        var check = function () {
-            count++;
-            if (count == 2) {
-                callback.call(self);
-            }
-        };
-        var loader = new egret.URLLoader();
-        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
-            var loader = e.currentTarget;
-            this._mcData = JSON.parse(loader.data);
-            check();
-        }, this);
-        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
-        var request = new egret.URLRequest("resource/assets/mc/animation.json");
-        loader.load(request);
     };
     return Main;
 }(egret.DisplayObjectContainer));

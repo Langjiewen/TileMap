@@ -1,10 +1,11 @@
 {
-	"groups":[
-	{
-		"keys":"ground_jpg,barrier_jpg,stand1_png,stand2_png,stand3_png,walk1_png,walk2_png,walk3_png,walk4_png,walk5_png,walk6_png,walk7_png,walk8_png,walk9_png,walk10_png,walk11_png,walk12_png,walk13_png,walk14_png,walk15_png,walk16_png,description_json",
-		"name":"preload"
-	}],
-	"resources":[
+	"groups": [
+		{
+			"keys": "ground_jpg,barrier_jpg,walk1_png,walk2_png,walk3_png,walk4_png,walk5_png,walk6_png,walk7_png,walk8_png,walk9_png,walk10_png,walk11_png,walk12_png,walk13_png,walk14_png,walk15_png,walk16_png,description_json,idle1_png,idle2_png,idle3_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
 		{
 			"url": "assets/ground.jpg",
 			"type": "image",
@@ -14,21 +15,6 @@
 			"url": "assets/barrier.jpg",
 			"type": "image",
 			"name": "barrier_jpg"
-		},
-		{
-			"url": "assets/stand1.png",
-			"type": "image",
-			"name": "stand1_png"
-		},
-		{
-			"url": "assets/stand2.png",
-			"type": "image",
-			"name": "stand2_png"
-		},
-	    {
-			"url": "assets/stand3.png",
-			"type": "image",
-			"name": "stand3_png"
 		},
 		{
 			"url": "assets/walk1.png",
@@ -110,9 +96,25 @@
 			"type": "image",
 			"name": "walk16_png"
 		},
-	    {
-			"name":"description_json",
-		    "type":"json",
-		    "url":"config/description.json"
-		}]
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "idle1_png",
+			"type": "image",
+			"url": "assets/idle1.png"
+		},
+		{
+			"name": "idle2_png",
+			"type": "image",
+			"url": "assets/idle2.png"
+		},
+		{
+			"name": "idle3_png",
+			"type": "image",
+			"url": "assets/idle3.png"
+		}
+	]
 }
