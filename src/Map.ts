@@ -99,8 +99,6 @@ var config: TileData[] = [
     { x: 7, y: 0, walkable: false, image: "barrier_jpg" },
     { x: 8, y: 0, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 0, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 0, walkable: true, image: "ground_jpg" },
-    { x: 11, y: 0, walkable: true, image: "ground_jpg" },
 
     { x: 0, y: 1, walkable: true, image: "ground_jpg" },
     { x: 1, y: 1, walkable: false, image: "barrier_jpg" },
@@ -112,9 +110,6 @@ var config: TileData[] = [
     { x: 7, y: 1, walkable: false, image: "barrier_jpg" },
     { x: 8, y: 1, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 1, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 1, walkable: false, image: "barrier_jpg" },
-    { x: 11, y: 1, walkable: false, image: "barrier_jpg" },
-
 
     { x: 0, y: 2, walkable: true, image: "ground_jpg" },
     { x: 1, y: 2, walkable: true, image: "ground_jpg" },
@@ -126,8 +121,6 @@ var config: TileData[] = [
     { x: 7, y: 2, walkable: false, image: "barrier_jpg" },
     { x: 8, y: 2, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 2, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 2, walkable: true, image: "ground_jpg" },
-    { x: 11, y: 2, walkable: true, image: "ground_jpg" },
 
     { x: 0, y: 3, walkable: true, image: "ground_jpg" },
     { x: 1, y: 3, walkable: false, image: "barrier_jpg" },
@@ -139,8 +132,6 @@ var config: TileData[] = [
     { x: 7, y: 3, walkable: true, image: "ground_jpg" },
     { x: 8, y: 3, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 3, walkable: false, image: "barrier_jpg" },
-    { x: 10, y: 3, walkable: false, image: "barrier_jpg" },
-    { x: 11, y: 3, walkable: true, image: "ground_jpg" },
 
     { x: 0, y: 4, walkable: true, image: "ground_jpg" },
     { x: 1, y: 4, walkable: true, image: "ground_jpg" },
@@ -152,8 +143,6 @@ var config: TileData[] = [
     { x: 7, y: 4, walkable: true, image: "ground_jpg" },
     { x: 8, y: 4, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 4, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 4, walkable: true, image: "ground_jpg" },
-    { x: 11, y: 4, walkable: true, image: "ground_jpg" },
 
     { x: 0, y: 5, walkable: false, image: "barrier_jpg" },
     { x: 1, y: 5, walkable: false, image: "barrier_jpg" },
@@ -165,8 +154,6 @@ var config: TileData[] = [
     { x: 7, y: 5, walkable: false, image: "barrier_jpg" },
     { x: 8, y: 5, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 5, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 5, walkable: false, image: "barrier_jpg" },
-    { x: 11, y: 5, walkable: false, image: "barrier_jpg" },
 
     { x: 0, y: 6, walkable: true, image: "ground_jpg" },
     { x: 1, y: 6, walkable: true, image: "ground_jpg" },
@@ -178,8 +165,6 @@ var config: TileData[] = [
     { x: 7, y: 6, walkable: true, image: "ground_jpg" },
     { x: 8, y: 6, walkable: true, image: "ground_jpg" },
     { x: 9, y: 6, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 6, walkable: true, image: "ground_jpg" },
-    { x: 11, y: 6, walkable: true, image: "ground_jpg" },
 
     { x: 0, y: 7, walkable: false, image: "barrier_jpg" },
     { x: 1, y: 7, walkable: false, image: "barrier_jpg" },
@@ -191,8 +176,6 @@ var config: TileData[] = [
     { x: 7, y: 7, walkable: true, image: "ground_jpg" },
     { x: 8, y: 7, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 7, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 7, walkable: false, image: "barrier_jpg" },
-    { x: 11, y: 7, walkable: false, image: "barrier_jpg" },
 
     { x: 0, y: 8, walkable: true, image: "ground_jpg" },
     { x: 1, y: 8, walkable: false, image: "barrier_jpg" },
@@ -204,8 +187,6 @@ var config: TileData[] = [
     { x: 7, y: 8, walkable: true, image: "ground_jpg" },
     { x: 8, y: 8, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 8, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 8, walkable: false, image: "barrier_jpg" },
-    { x: 11, y: 8, walkable: true, image: "ground_jpg" },
 
     { x: 0, y: 9, walkable: true, image: "ground_jpg" },
     { x: 1, y: 9, walkable: false, image: "barrier_jpg" },
@@ -217,8 +198,6 @@ var config: TileData[] = [
     { x: 7, y: 9, walkable: true, image: "ground_jpg" },
     { x: 8, y: 9, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 9, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 9, walkable: true, image: "ground_jpg" },
-    { x: 11, y: 9, walkable: true, image: "ground_jpg" },
 
     { x: 0, y: 10, walkable: true, image: "ground_jpg" },
     { x: 1, y: 10, walkable: false, image: "barrier_jpg" },
@@ -230,8 +209,6 @@ var config: TileData[] = [
     { x: 7, y: 10, walkable: true, image: "ground_jpg" },
     { x: 8, y: 10, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 10, walkable: false, image: "barrier_jpg" },
-    { x: 10, y: 10, walkable: false, image: "barrier_jpg" },
-    { x: 11, y: 10, walkable: true, image: "ground_jpg" },
 
     { x: 0, y: 11, walkable: true, image: "ground_jpg" },
     { x: 1, y: 11, walkable: true, image: "ground_jpg" },
@@ -243,8 +220,72 @@ var config: TileData[] = [
     { x: 7, y: 11, walkable: true, image: "ground_jpg" },
     { x: 8, y: 11, walkable: false, image: "barrier_jpg" },
     { x: 9, y: 11, walkable: true, image: "ground_jpg" },
-    { x: 10, y: 11, walkable: true, image: "ground_jpg" },
-    { x: 11, y: 11, walkable: true, image: "ground_jpg" },
+
+    { x: 0, y: 12, walkable: true, image: "barrier_jpg" },
+    { x: 1, y: 12, walkable: true, image: "ground_jpg" },
+    { x: 2, y: 12, walkable: true, image: "barrier_jpg" },
+    { x: 3, y: 12, walkable: true, image: "barrier_jpg" },
+    { x: 4, y: 12, walkable: true, image: "ground_jpg" },
+    { x: 5, y: 12, walkable: true, image: "ground_jpg" },
+    { x: 6, y: 12, walkable: true, image: "barrier_jpg" },
+    { x: 7, y: 12, walkable: true, image: "barrier_jpg" },
+    { x: 8, y: 12, walkable: false, image: "barrier_jpg" },
+    { x: 9, y: 12, walkable: true, image: "barrier_jpg" },
+
+    { x: 0, y: 13, walkable: true, image: "ground_jpg" },
+    { x: 1, y: 13, walkable: true, image: "ground_jpg" },
+    { x: 2, y: 13, walkable: true, image: "barrier_jpg" },
+    { x: 3, y: 13, walkable: true, image: "ground_jpg" },
+    { x: 4, y: 13, walkable: true, image: "ground_jpg" },
+    { x: 5, y: 13, walkable: true, image: "ground_jpg" },
+    { x: 6, y: 13, walkable: true, image: "ground_jpg" },
+    { x: 7, y: 13, walkable: true, image: "barrier_jpg" },
+    { x: 8, y: 13, walkable: false, image: "barrier_jpg" },
+    { x: 9, y: 13, walkable: true, image: "ground_jpg" },
+ 
+    { x: 0, y: 14, walkable: true, image: "barrier_jpg" },
+    { x: 1, y: 14, walkable: true, image: "ground_jpg" },
+    { x: 2, y: 14, walkable: true, image: "ground_jpg" },
+    { x: 3, y: 14, walkable: true, image: "ground_jpg" },
+    { x: 4, y: 14, walkable: true, image: "ground_jpg" },
+    { x: 5, y: 14, walkable: true, image: "ground_jpg" },
+    { x: 6, y: 14, walkable: true, image: "barrier_jpg" },
+    { x: 7, y: 14, walkable: true, image: "ground_jpg" },
+    { x: 8, y: 14, walkable: false, image: "ground_jpg" },
+    { x: 9, y: 14, walkable: true, image: "ground_jpg" },
+    
+    { x: 0, y: 15, walkable: true, image: "barrier_jpg" },
+    { x: 1, y: 15, walkable: true, image: "ground_jpg" },
+    { x: 2, y: 15, walkable: true, image: "barrier_jpg" },
+    { x: 3, y: 15, walkable: true, image: "barrier_jpg" },
+    { x: 4, y: 15, walkable: true, image: "barrier_jpg" },
+    { x: 5, y: 15, walkable: true, image: "barrier_jpg" },
+    { x: 6, y: 15, walkable: true, image: "ground_jpg" },
+    { x: 7, y: 15, walkable: true, image: "ground_jpg" },
+    { x: 8, y: 15, walkable: false, image: "ground_jpg" },
+    { x: 9, y: 15, walkable: true, image: "barrier_jpg" },
+    
+    { x: 0, y: 16, walkable: true, image: "barrier_jpg" },
+    { x: 1, y: 16, walkable: true, image: "ground_jpg" },
+    { x: 2, y: 16, walkable: true, image: "ground_jpg" },
+    { x: 3, y: 16, walkable: true, image: "ground_jpg" },
+    { x: 4, y: 16, walkable: true, image: "ground_jpg" },
+    { x: 5, y: 16, walkable: true, image: "ground_jpg" },
+    { x: 6, y: 16, walkable: true, image: "ground_jpg" },
+    { x: 7, y: 16, walkable: true, image: "barrier_jpg" },
+    { x: 8, y: 16, walkable: false, image: "barrier_jpg" },
+    { x: 9, y: 16, walkable: true, image: "barrier_jpg" },
+
+    { x: 0, y: 17, walkable: true, image: "barrier_jpg" },
+    { x: 1, y: 17, walkable: true, image: "ground_jpg" },
+    { x: 2, y: 17, walkable: true, image: "barrier_jpg" },
+    { x: 3, y: 17, walkable: true, image: "barrier_jpg" },
+    { x: 4, y: 17, walkable: true, image: "ground_jpg" },
+    { x: 5, y: 17, walkable: true, image: "ground_jpg" },
+    { x: 6, y: 17, walkable: true, image: "barrier_jpg" },
+    { x: 7, y: 17, walkable: true, image: "barrier_jpg" },
+    { x: 8, y: 17, walkable: false, image: "barrier_jpg" },
+    { x: 9, y: 17, walkable: true, image: "barrier_jpg" },
 ]
 
 
@@ -268,7 +309,7 @@ class Tile extends egret.DisplayObjectContainer {
         bitmap.texture = RES.getRes(data.image);
         bitmap.width = 64;
         bitmap.height = 64;
-        //this.addChild(bitmap);
+
         this.x = data.x * TileMap.TILE_SIZE;
         this.y = data.y * TileMap.TILE_SIZE;
         this.addChild(bitmap);

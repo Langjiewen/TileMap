@@ -13,8 +13,8 @@ var game_file_list = [
 	"bin-debug/LoadingUI.js",
 	"bin-debug/Main.js",
 	"bin-debug/Map.js",
-	"bin-debug/Observer.js",
 	"bin-debug/Node.js",
+	"bin-debug/Observer.js",
 	//----auto game_file_list end----
 ];
 
