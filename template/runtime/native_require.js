@@ -14,7 +14,7 @@ var game_file_list = [
 	"bin-debug/Main.js",
 	"bin-debug/Map.js",
 	"bin-debug/Observer.js",
-	"bin-debug/TileNode.js",
+	"bin-debug/Node.js",
 	//----auto game_file_list end----
 ];
 
