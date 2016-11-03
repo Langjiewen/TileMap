@@ -1,12 +1,12 @@
 class Grid//包含网格节点信息
 {
-    startNode: TileNode;
-    endNode: TileNode;
-    nodes: TileNode[][];
-    numCols: number;
-    numRows: number;
+    startNode: node;
+    endNode: node;
+    nodes: node[][] = [];
+    numCols: number;//列
+    numRows: number;//行
 
-    constructor(numCols: number,numRows: number)
+    constructor(numCols: number,numRows: number,data: TileData [])
     {
         this.numCols = numCols;
         this.numRows = numRows;
@@ -17,24 +17,25 @@ class Grid//包含网格节点信息
             this.nodes[i] = new Array();
             for(var j:number =0; j < this.numRows; j++)
             {
-                this.nodes[i][j] = new TileNode(i,j);
+                this.nodes[i][j] = new node(i,j);
+                this.nodes[i][j].walkable = data[i + j*this.numRows].walkable;
             }
         }
     }
 
     public getNode(x: number,y: number)
     {
-        return this.nodes[x][y] as TileNode;
+        return this.nodes[x][y] as node;
     }
 
     public setStartNode(x: number,y: number)
     {
-        this.startNode = this.nodes[x][y] as TileNode;
+        this.startNode = this.nodes[x][y] as node;
     }
 
     public setEndNode(x: number,y: number)
     {
-        this.endNode = this.nodes[x][y] as TileNode;
+        this.endNode = this.nodes[x][y] as node;
     }
 
     public setWalkable(x: number,y: number,value: boolean)

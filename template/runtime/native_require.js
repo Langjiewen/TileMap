@@ -15,13 +15,13 @@ var game_file_list = [
 	"bin-debug/Map/TitleMap.js",
 	"bin-debug/PathFinding/AStar.js",
 	"bin-debug/PathFinding/Grid.js",
-	"bin-debug/PathFinding/Node.js",
 	"bin-debug/Player/Player.js",
 	"bin-debug/Player/PlayerState/PlayerState.js",
 	"bin-debug/Player/PlayerState/PlayerIdleState.js",
 	"bin-debug/Player/PlayerState/PlayerStateMachine.js",
 	"bin-debug/Player/PlayerState/PlayerWalkState.js",
 	"bin-debug/State.js",
+	"bin-debug/PathFinding/Node.js",
 	//----auto game_file_list end----
 ];
 

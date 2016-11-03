@@ -27,8 +27,6 @@ class Player extends egret.DisplayObjectContainer
 
     public move(targetX: number,targetY: number)
     {
-        egret.Tween.removeTweens(this.character);
-
         if (targetX > this.character.x)
         {
             this.character.skewY = 180;
@@ -39,7 +37,6 @@ class Player extends egret.DisplayObjectContainer
         }
         
         this.currentState.setState (new PlayerWalkState(this));
-        egret.Tween.get(this.character).to({ x: targetX, y: targetY }, 2000).call( function(){this.idle()} ,this);
     }
 
     public idle()

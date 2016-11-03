@@ -1,1 +1,1 @@
-{"version":3,"file":"Node.js","sourceRoot":"","sources":["../../src/PathFinding/Node.ts"],"names":[],"mappings":""}
+{"version":3,"file":"Node.js","sourceRoot":"","sources":["../../src/PathFinding/Node.ts"],"names":[],"mappings":"AAAA;IAUI,cAAY,CAAS,EAAC,CAAS;QAE3B,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC;QACX,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC;IACf,CAAC;;IACL,WAAC;AAAD,CAAC,AAfD,IAeC;oBAfK,IAAI;AAeT"}

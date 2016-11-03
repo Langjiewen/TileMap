@@ -118,16 +118,11 @@ class Main extends egret.DisplayObjectContainer {
      */
     private createGameScene():void {
 
-        var map:TileMap = new TileMap();
-        this.addChild(map); 
-
         var player: Player = new Player();
+        var map:TileMap = new TileMap(player);
+        this.addChild(map); 
         this.addChild(player);
         player.idle();
-
-        this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, (evt: egret.TouchEvent) => {
-            player.move(evt.stageX, evt.stageY);
-        }, this);
 
         //根据name关键字，异步获取一个json配置文件，name属性请参考resources/resource.json配置文件的内容。
         // Get asynchronously a json configuration file according to name keyword. As for the property of name please refer to the configuration file of resources/resource.json.

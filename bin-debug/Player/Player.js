@@ -17,7 +17,6 @@ var Player = (function (_super) {
     }
     var d = __define,c=Player,p=c.prototype;
     p.move = function (targetX, targetY) {
-        egret.Tween.removeTweens(this.character);
         if (targetX > this.character.x) {
             this.character.skewY = 180;
         }
@@ -25,7 +24,6 @@ var Player = (function (_super) {
             this.character.skewY = 0;
         }
         this.currentState.setState(new PlayerWalkState(this));
-        egret.Tween.get(this.character).to({ x: targetX, y: targetY }, 2000).call(function () { this.idle(); }, this);
     };
     p.idle = function () {
         this.currentState.setState(new PlayerIdleState(this));

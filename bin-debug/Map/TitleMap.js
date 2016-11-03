@@ -1,12 +1,16 @@
 var TileMap = (function (_super) {
     __extends(TileMap, _super);
-    function TileMap() {
+    function TileMap(player) {
         _super.call(this);
+        this.moveX = [];
+        this.moveY = [];
         this.init();
-        console.log(config.length);
+        this.player = player;
+        this.index = 0;
     }
     var d = __define,c=TileMap,p=c.prototype;
     p.init = function () {
+        var _this = this;
         for (var i = 0; i < config.length; i++) {
             var data = config[i];
             var tile = new Tile(data);
@@ -14,12 +18,41 @@ var TileMap = (function (_super) {
         }
         this.touchEnabled = true;
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
-            var localX = e.localX;
-            var localY = e.localY;
-            var gridX = Math.floor(localX / TileMap.TILE_SIZE);
-            var gridY = Math.floor(localY / TileMap.TILE_SIZE);
-            console.log(gridX, gridY);
+            var playerX = Math.floor(_this.player.character.x / TileMap.TILE_SIZE);
+            var playerY = Math.floor(_this.player.character.y / TileMap.TILE_SIZE);
+            var localX = Math.floor(e.localX / TileMap.TILE_SIZE);
+            var localY = Math.floor(e.localY / TileMap.TILE_SIZE);
+            var grid = new Grid(10, 10, config);
+            grid.setStartNode(playerX, playerY);
+            grid.setEndNode(localX, localY);
+            _this.astar = new AStar(grid);
+            if (_this.astar.findPath()) {
+                _this.astar.path.map(function (tile) {
+                    console.log("x:" + tile.x + ",y:" + tile.y);
+                });
+                _this.index = 1;
+                _this.moveX[_this.index] = _this.astar.path[_this.index].x * TileMap.TILE_SIZE + TileMap.TILE_SIZE / 2;
+                _this.moveY[_this.index] = _this.astar.path[_this.index].y * TileMap.TILE_SIZE + TileMap.TILE_SIZE / 2;
+                _this.player.move(_this.moveX[_this.index], _this.moveY[_this.index]);
+                egret.Tween.get(_this.player.character).to({ x: _this.moveX[_this.index], y: _this.moveY[_this.index] }, 600).wait(10).call(function () { this.player.idle(); }, _this);
+                var timer = new egret.Timer(1000, _this.astar.path.length - 2);
+                //注册事件侦听器
+                timer.addEventListener(egret.TimerEvent.TIMER, _this.timerFunc, _this);
+                timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, _this.timerComFunc, _this);
+                //开始计时
+                timer.start();
+            }
         }, this);
+    };
+    p.timerFunc = function () {
+        this.index++;
+        this.moveX[this.index] = this.astar.path[this.index].x * TileMap.TILE_SIZE + TileMap.TILE_SIZE / 2;
+        this.moveY[this.index] = this.astar.path[this.index].y * TileMap.TILE_SIZE + TileMap.TILE_SIZE / 2;
+        this.player.move(this.moveX[this.index], this.moveY[this.index]);
+        egret.Tween.get(this.player.character).to({ x: this.moveX[this.index], y: this.moveY[this.index] }, 600).wait(10).call(function () { this.player.idle(); }, this);
+    };
+    p.timerComFunc = function () {
+        console.log("计时结束");
     };
     TileMap.TILE_SIZE = 64;
     return TileMap;

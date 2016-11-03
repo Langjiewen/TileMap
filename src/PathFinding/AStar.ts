@@ -1,18 +1,22 @@
 class AStar//完成寻路工作
 {
     grid: Grid;//网格
-    open: TileNode[];//待查列表
-    closed: TileNode[];//已查列表
-    path: TileNode[];//最终路径的数组 节点列表
-    endNode: TileNode;
-    startNode: TileNode;
+    open: node[] = [];//待查列表
+    closed: node[] = [];//已查列表
+    path: node[] = [];//最终路径的数组 节点列表
+    endNode: node;
+    startNode: node;
     straightCost: number = 1;
     diagCost: number = Math.SQRT2;
 
-    constructor()
-    {}
+    constructor(grid: Grid)//穿入网络，并从中得到起始节点和终止节点
+    {
+        this.grid = grid;
+        this.startNode = grid.startNode;
+        this.endNode = grid.endNode;
+    }
 
-    public diagonal(node: TileNode)
+    public diagonal(node: node)
     {
         var dx: number = Math.abs(node.x - this.endNode.x);
         var dy: number = Math.abs(node.y - this.endNode.y);
@@ -21,7 +25,7 @@ class AStar//完成寻路工作
         return this.diagCost*diag + this.straightCost*(staright - 2*diag);
     }
 
-    public isOpen(node: TileNode): boolean
+    public isOpen(node: node): boolean
     { 
         for(var i: number = 0; i < this.open.length; i++)
         {
@@ -33,7 +37,7 @@ class AStar//完成寻路工作
         return false;
     }
 
-    public isClosed(node: TileNode): boolean
+    public isClosed(node: node): boolean
     {
         for(var i: number = 0; i < this.closed.length; i++)
         {
@@ -48,7 +52,7 @@ class AStar//完成寻路工作
     public buildPath()
     {
         this.path = new Array();//为路径建立一个新数组
-        var node: TileNode = this.endNode;
+        var node: node = this.endNode;
         this.path.push(node);//把终止节点放入数组
         while(node != this.startNode)
         {
@@ -60,23 +64,23 @@ class AStar//完成寻路工作
 
     public search (): boolean
     {
-        var node: TileNode = this.startNode;//建立一个节点变量，跟踪当前节点，这个节点最初是起始节点
+        var node: node = this.startNode;//建立一个节点变量，跟踪当前节点，这个节点最初是起始节点
         while(node != this.endNode)//退出循环则说明寻路结束
         {
             var startX: number = Math.max(0,node.x - 1);
             var endX: number = Math.min(this.grid.numCols - 1,node.x + 1);
 
             var startY: number = Math.max(0,node.y - 1);
-            var endY: number = Math.min(this.grid.numRows + 1);
+            var endY: number = Math.min(this.grid.numRows - 1,node.y + 1);
 
             //双重循环，检查当前节点周围的所有节点，从x-1循环到x+1以及从y-1循环到y+1 且确保不会访问边界以外的区域，保证索引永远在网格内
             for(var i: number = startX; i <= endX; i++)
             {
                 for(var j: number = startY; j <= endY; j++)
                 {
-                    var test: TileNode = this.grid.getNode(i,j);//从网格得到测试节点
+                    var test: node = this.grid.nodes[i][j];//从网格得到测试节点
                     //如果测试节点就是当前节点或测试节点不可通过，则直接将其忽略，移向下一个节点
-                    if(test == node || !test.walkable)
+                    if(test == node || !test.walkable ||!this.grid.nodes[node.x][test.y].walkable||!this.grid.nodes[test.x][node.y].walkable)
                     {
                         continue;
                     } 
@@ -134,22 +138,17 @@ class AStar//完成寻路工作
 
             //如果待查列表中还有节点，则找出其中代价最小的一个节点，按各个元素的f属性对列表排序，取列表最下面的元素
            this.open.sort(function(a,b){return a.f - b.f});
-           node = this.open.shift() as TileNode;
+           node = this.open.shift() as node;
         }
 
         this.buildPath()
         return true;
     }
 
-    public findPath(grid: Grid):boolean
+    public findPath():boolean
     {
-        this.grid = grid;//传入网格
         this.open = new Array();//创建空的待查列表
         this.closed = new Array();//创建空的已查列表
-
-        //从传入的网格获得起始节点和终止节点
-        this.startNode = grid.startNode;
-        this.endNode = grid.endNode;
 
         //计算起始节点的代价
         this.startNode.g = 0;
@@ -164,12 +163,12 @@ class AStar//完成寻路工作
         return this.path;
     }
 
-    public manhattan(node: TileNode): number
+    public manhattan(node: node): number
     {
         return Math.abs(node.x - this.endNode.x)*this.straightCost + Math.abs(node.y + this.endNode.y)*this.straightCost;
     }
 
-    public euclidiam(node: TileNode): number
+    public euclidiam(node: node): number
     {
         var dx: number = Math.abs(node.x - this.endNode.x);
         var dy: number = Math.abs(node.y - this.endNode.y);
